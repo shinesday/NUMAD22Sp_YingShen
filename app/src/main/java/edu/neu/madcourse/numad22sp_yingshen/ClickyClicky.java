@@ -58,6 +58,9 @@ public class ClickyClicky extends AppCompatActivity implements View.OnClickListe
             case R.id.buttonF:
                 message.setText("Pressed: F");
                 break;
+            default:
+                message.setText("Pressed:-");
+                break;
         }
 
     }
