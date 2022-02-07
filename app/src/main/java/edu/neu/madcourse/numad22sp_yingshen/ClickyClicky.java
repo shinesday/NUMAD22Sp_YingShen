@@ -1,6 +1,9 @@
 package edu.neu.madcourse.numad22sp_yingshen;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.res.Configuration;
+import android.media.VolumeShaper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -58,6 +61,5 @@ public class ClickyClicky extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
 
 }
