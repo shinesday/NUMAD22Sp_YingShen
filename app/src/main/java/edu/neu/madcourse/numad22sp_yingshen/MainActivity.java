@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button button;
     Button button2;
+    Button linkCollector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +23,13 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                openAboutMe();
+            }
+            /**@Override
+            public void onClick(View view) {
                 Toast.makeText(MainActivity.this,"Ying Shen\nshen.ying@northeastern.edu",
                         Toast.LENGTH_LONG).show();
-            }
+            }*/
         });
 
         button2 = findViewById(R.id.button2);
@@ -35,11 +40,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        linkCollector = findViewById(R.id.linkCollector);
+        linkCollector.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openLinkCollector();
+            }
+        });
+
+
+
     }
     public void openClickyClicky(){
         Intent intent = new Intent(this, ClickyClicky.class);
         startActivity(intent);
 
+    }
+
+    public void openAboutMe(){
+        Intent intentAboutMe = new Intent(this, ClickyClicky.class);
+        startActivity(intentAboutMe);
+    }
+
+    public void openLinkCollector() {
+        Intent intentLinkCollector = new Intent(this, LinkCollector.class);
+        startActivity(intentLinkCollector);
     }
 
 }
