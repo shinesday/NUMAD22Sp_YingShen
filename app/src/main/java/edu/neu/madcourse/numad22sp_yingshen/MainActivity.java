@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openAboutMe(){
-        Intent intentAboutMe = new Intent(this, ClickyClicky.class);
+        Intent intentAboutMe = new Intent(this, AboutMe.class);
         startActivity(intentAboutMe);
     }
 
