@@ -26,6 +26,7 @@ public class RviewAdapter extends RecyclerView.Adapter<RviewHolder> {
         this.listener = listener;
     }
 
+
     @Override
     public RviewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view, parent, false);
@@ -36,8 +37,8 @@ public class RviewAdapter extends RecyclerView.Adapter<RviewHolder> {
     public void onBindViewHolder(RviewHolder holder, int position) {
         ItemCard currentItem = itemList.get(position);
 
-        holder.itemName.setText(currentItem.getItemName());
-        holder.itemDesc.setText(currentItem.getItemDesc());
+        holder.itemName.setText(currentItem.getWebsiteName());
+        holder.itemDesc.setText(currentItem.getWebsiteAddress());
         holder.checkBox.setChecked(currentItem.getStatus());
     }
 

@@ -1,30 +1,31 @@
 package edu.neu.madcourse.numad22sp_yingshen;
 
-public class ItemCard implements ItemClickListener {
+public class ItemCard implements ItemClickListener{
 
-    private final String itemName;
-    private final String itemDesc;
+    private final String websiteName;
+    private final String websiteAddress;
     private boolean isChecked;
 
     //Constructor
     public ItemCard(String itemName, String itemDesc,boolean isChecked) {
-        this.itemName = itemName;
-        this.itemDesc = itemDesc;
+        this.websiteName = itemName;
+        this.websiteAddress = itemDesc;
         this.isChecked = isChecked;
     }
 
     //Getters for the imageSource, itemName and itemDesc
-    public String getItemDesc() {
-        return itemDesc;
+    public String getWebsiteAddress() {
+        return websiteAddress;
     }
 
-    public String getItemName() {
-        return itemName + (isChecked ? "(checked)" : "");
+    public String getWebsiteName() {
+        return websiteName;
     }
 
     public boolean getStatus() {
         return isChecked;
     }
+
 
 
     @Override

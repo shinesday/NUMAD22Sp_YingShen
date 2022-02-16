@@ -107,7 +107,7 @@ public class LinkCollector extends AppCompatActivity implements InputDialog.Inpu
 
     private void addItem(int position) {
         itemList.add(position, new ItemCard(websiteName.toString(), websiteAddress.toString() + Math.abs(new Random().nextInt(100000)), false));
-        Toast.makeText(LinkCollector.this, "Add an item", Toast.LENGTH_SHORT).show();
+        Toast.makeText(LinkCollector.this, "Added an item", Toast.LENGTH_SHORT).show();
 
         rviewAdapter.notifyItemInserted(position);
     }
@@ -124,9 +124,9 @@ public class LinkCollector extends AppCompatActivity implements InputDialog.Inpu
         // This is only a possible way to do, please find your own way to generate the key
         for (int i = 0; i < size; i++) {
             // put itemName information into instance
-            outState.putString(KEY_OF_INSTANCE + i + "1", itemList.get(i).getItemName());
+            outState.putString(KEY_OF_INSTANCE + i + "1", itemList.get(i).getWebsiteName());
             // put itemDesc information into instance
-            outState.putString(KEY_OF_INSTANCE + i + "2", itemList.get(i).getItemDesc());
+            outState.putString(KEY_OF_INSTANCE + i + "2", itemList.get(i).getWebsiteAddress());
             // put isChecked information into instance
             outState.putBoolean(KEY_OF_INSTANCE + i + "3", itemList.get(i).getStatus());
         }
