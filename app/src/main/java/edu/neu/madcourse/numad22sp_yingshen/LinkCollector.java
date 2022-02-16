@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class LinkCollector extends AppCompatActivity implements InputDialog.InputDialogListener {
 
@@ -105,9 +105,10 @@ public class LinkCollector extends AppCompatActivity implements InputDialog.Inpu
 
     }
 
-    private void addItem(int position) {
-        itemList.add(position, new ItemCard(websiteName.toString(), websiteAddress.toString() + Math.abs(new Random().nextInt(100000)), false));
-        Toast.makeText(LinkCollector.this, "Added an item", Toast.LENGTH_SHORT).show();
+    @Override
+    public void addItem(int position, String name, String address) {
+        itemList.add(position, new ItemCard(name, address, false));
+        Toast.makeText(LinkCollector.this, "Added a link", Toast.LENGTH_SHORT).show();
 
         rviewAdapter.notifyItemInserted(position);
     }
@@ -135,9 +136,9 @@ public class LinkCollector extends AppCompatActivity implements InputDialog.Inpu
     }
 
     @Override
-    public void applyInput(String name, String address) {
-        websiteName.setText(name);
-        websiteAddress.setText(address);
+    public void showSnackbar(String message) {
+        Snackbar snackbar = Snackbar.make(recyclerView, message, Snackbar.LENGTH_INDEFINITE);
+        snackbar.show();
     }
 
 }

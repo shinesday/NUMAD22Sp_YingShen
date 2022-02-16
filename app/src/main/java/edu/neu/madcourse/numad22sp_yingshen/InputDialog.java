@@ -36,29 +36,27 @@ public class InputDialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String name = editWebsiteName.getText().toString();
                         String address = editWebsiteAddress.getText().toString();
-                        listener.applyInput(name, address);
+                        String message = "Link is added";
+                        try {
+                            listener.addItem(0, name, address);
+                        } catch (Exception e){
+                            message = "Cannot create link";
+
+                        }
+                        listener.showSnackbar(message);
 
                     }
                 });
+
         editWebsiteName = view.findViewById(R.id.edit_website_name);
         editWebsiteAddress = view.findViewById(R.id.edit_website_address);
 
         return builder.create();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            listener = (InputDialogListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + "Must implement InputDialogListener");
-        }
-
-    }
-
     public interface InputDialogListener {
-        void applyInput(String name, String address);
+        void addItem(int position, String name, String address);
+        void showSnackbar(String message);
     }
 
 }
