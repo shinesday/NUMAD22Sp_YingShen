@@ -1,41 +1,44 @@
 package edu.neu.madcourse.numad22sp_yingshen;
 
-public class ItemCard implements ItemClickListener{
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.util.Patterns;
+
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+
+public class ItemCard {
 
     private final String websiteName;
     private final String websiteAddress;
-    private boolean isChecked;
 
-    //Constructor
-    public ItemCard(String itemName, String itemDesc,boolean isChecked) {
-        this.websiteName = itemName;
-        this.websiteAddress = itemDesc;
-        this.isChecked = isChecked;
+    public ItemCard(String websiteName, String websiteAddress) {
+        this.websiteName = websiteName;
+        this.websiteAddress = websiteAddress;
     }
 
-    //Getters for the imageSource, itemName and itemDesc
-    public String getWebsiteAddress() {
-        return websiteAddress;
+    public void onLinkClicked(Context context) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteAddress));
+        context.startActivity(browserIntent);
     }
 
     public String getWebsiteName() {
         return websiteName;
     }
 
-    public boolean getStatus() {
-        return isChecked;
+    public String getWebsiteAddress() {
+        return websiteAddress;
     }
 
-
-
-    @Override
-    public void onItemClick(int position) {
-        isChecked = !isChecked;
-    }
-
-    @Override
-    public void onCheckBoxClick(int position) {
-        isChecked = !isChecked;
+    public boolean isValid() {
+        try {
+            new URL(websiteAddress).toURI();
+        } catch (MalformedURLException | URISyntaxException e) {
+            return false;
+        }
+        return Patterns.WEB_URL.matcher(websiteAddress).matches();
     }
 
 }

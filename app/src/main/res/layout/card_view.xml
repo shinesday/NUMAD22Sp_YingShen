@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="7dp"
-            android:text="Website Name"
+            android:text="@string/website_name"
             android:textColor="@android:color/black"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -30,7 +30,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="7dp"
-            android:text="http://" />
+            android:text="@string/http" />
 
     </RelativeLayout>
 

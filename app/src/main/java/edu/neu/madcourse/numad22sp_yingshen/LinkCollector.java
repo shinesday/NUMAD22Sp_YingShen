@@ -1,9 +1,10 @@
 package edu.neu.madcourse.numad22sp_yingshen;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.app.AlertDialog;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,17 +17,18 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
-public class LinkCollector extends AppCompatActivity implements InputDialog.InputDialogListener {
+public class LinkCollector extends AppCompatActivity {
 
-    //Creating the essential parts needed for a Recycler view to work: RecyclerView, Adapter, LayoutManager
-    private ArrayList<ItemCard> itemList = new ArrayList<>();
-    FloatingActionButton addButton;
-    TextView websiteName;
-    TextView websiteAddress;
+    private ArrayList<ItemCard> itemList;
 
     private RecyclerView recyclerView;
     private RviewAdapter rviewAdapter;
-    private RecyclerView.LayoutManager rLayoutManger;
+    private FloatingActionButton addButton;
+    private AlertDialog inputAlertDialog;
+
+    private EditText websiteName;
+    private EditText websiteAddress;
+
 
     private static final String KEY_OF_INSTANCE = "KEY_OF_INSTANCE";
     private static final String NUMBER_OF_ITEMS = "NUMBER_OF_ITEMS";
@@ -36,16 +38,18 @@ public class LinkCollector extends AppCompatActivity implements InputDialog.Inpu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_link_collector);
 
-        addButton = findViewById(R.id.add_button);
-        websiteName = findViewById(R.id.website_name);
-        websiteAddress = findViewById(R.id.website_address);
+        init(savedInstanceState);
 
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openDialog();
-            }
-        });
+        itemList = new ArrayList<>();
+        addButton = findViewById(R.id.add_button);
+        recyclerView = findViewById(R.id.recycler_view);
+
+        addButton.setOnClickListener(v -> addInfo());
+
+        createInputAlertDialog();
+        createRecyclerView();
+
+        rviewAdapter.setOnLinkClickListener(position -> itemList.get(position).onLinkClicked(this));
 
         //Specify what action a specific gesture performs, in this case swiping right or left deletes the entry
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -56,7 +60,7 @@ public class LinkCollector extends AppCompatActivity implements InputDialog.Inpu
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                Toast.makeText(LinkCollector.this, "Delete an item", Toast.LENGTH_SHORT).show();
+                Snackbar.make(recyclerView, "Deleted a link", Snackbar.LENGTH_LONG).show();
                 int position = viewHolder.getLayoutPosition();
                 itemList.remove(position);
 
@@ -67,50 +71,76 @@ public class LinkCollector extends AppCompatActivity implements InputDialog.Inpu
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
-    public void  openDialog() {
-        InputDialog newDialog = new InputDialog();
-        newDialog.show(getSupportFragmentManager(), "input dialog");
+    public void createInputAlertDialog() {
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View view = layoutInflater.inflate(R.layout.dialog_layout, null);
 
+        websiteName = view.findViewById(R.id.edit_website_name);
+        websiteAddress = view.findViewById(R.id.edit_website_address);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setView(view);
+
+        alertDialogBuilder
+                .setTitle("Add a link")
+                .setCancelable(false)
+                .setPositiveButton("Add",
+                        (dialog, id) -> {
+                            ItemCard link = new ItemCard(websiteName.getText().toString(), websiteAddress.getText().toString());
+                            if (link.isValid()) {
+                                itemList.add(0, link);
+                                rviewAdapter.notifyDataSetChanged();
+                                Snackbar.make(recyclerView, "Link was added", Snackbar.LENGTH_LONG).show();
+                            } else {
+                                Snackbar.make(recyclerView, "Invalid link", Snackbar.LENGTH_LONG).show();
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        (dialog, id) -> dialog.cancel());
+
+        inputAlertDialog = alertDialogBuilder.create();
     }
 
-    private void createRecyclerView() {
+    private void init(Bundle savedInstanceState) {
+        initialItemData(savedInstanceState);
+        createRecyclerView();
+    }
 
-        rLayoutManger = new LinearLayoutManager(this);
+    private void initialItemData(Bundle savedInstanceState){
 
+        if(savedInstanceState != null && savedInstanceState.containsKey(NUMBER_OF_ITEMS)){
+            if(itemList == null || itemList.size() == 0){
+
+                int size = savedInstanceState.getInt(NUMBER_OF_ITEMS);
+
+                for(int i=0; i<size; i++){
+                    String name = savedInstanceState.getString(KEY_OF_INSTANCE+i+"0");
+                    String address = savedInstanceState.getString(KEY_OF_INSTANCE+i+"1");
+
+                    ItemCard link = new ItemCard(name, address);
+
+                    itemList.add(link);
+
+                }
+            }
+        }
+    }
+
+    public void createRecyclerView() {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-
         rviewAdapter = new RviewAdapter(itemList);
-        ItemClickListener itemClickListener = new ItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                //attributions bond to the item has been changed
-                itemList.get(position).onItemClick(position);
 
-                rviewAdapter.notifyItemChanged(position);
-            }
-
-            @Override
-            public void onCheckBoxClick(int position) {
-                //attributions bond to the item has been changed
-                itemList.get(position).onCheckBoxClick(position);
-
-                rviewAdapter.notifyItemChanged(position);
-            }
-        };
-        rviewAdapter.setOnItemClickListener(itemClickListener);
         recyclerView.setAdapter(rviewAdapter);
-        recyclerView.setLayoutManager(rLayoutManger);
-
-
+        recyclerView.setLayoutManager(layoutManager);
     }
 
-    @Override
-    public void addItem(int position, String name, String address) {
-        itemList.add(position, new ItemCard(name, address, false));
-        Toast.makeText(LinkCollector.this, "Added a link", Toast.LENGTH_SHORT).show();
-
-        rviewAdapter.notifyItemInserted(position);
+    private void addInfo() {
+        websiteName.getText().clear();
+        websiteAddress.setText("http://");
+        websiteName.requestFocus();
+        inputAlertDialog.show();
     }
 
     // Handling Orientation Changes on Android
@@ -121,24 +151,12 @@ public class LinkCollector extends AppCompatActivity implements InputDialog.Inpu
         int size = itemList == null ? 0 : itemList.size();
         outState.putInt(NUMBER_OF_ITEMS, size);
 
-        // Need to generate unique key for each item
-        // This is only a possible way to do, please find your own way to generate the key
         for (int i = 0; i < size; i++) {
-            // put itemName information into instance
             outState.putString(KEY_OF_INSTANCE + i + "1", itemList.get(i).getWebsiteName());
-            // put itemDesc information into instance
             outState.putString(KEY_OF_INSTANCE + i + "2", itemList.get(i).getWebsiteAddress());
-            // put isChecked information into instance
-            outState.putBoolean(KEY_OF_INSTANCE + i + "3", itemList.get(i).getStatus());
         }
         super.onSaveInstanceState(outState);
 
-    }
-
-    @Override
-    public void showSnackbar(String message) {
-        Snackbar snackbar = Snackbar.make(recyclerView, message, Snackbar.LENGTH_INDEFINITE);
-        snackbar.show();
     }
 
 }

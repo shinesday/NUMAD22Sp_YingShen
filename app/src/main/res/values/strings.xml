@@ -24,4 +24,6 @@
     <string name="link_collector">Link Collector</string>
     <string name="todo">TODO</string>
     <string name="add">Add</string>
+    <string name="website_name">Website Name</string>
+    <string name="http">http://</string>
 </resources>
