@@ -9,16 +9,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/custom_item_card"
         android:layout_margin="5dp">
 
         <TextView
             android:id="@+id/website_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="7dp"
             android:text="@string/website_name"
-            android:textColor="@android:color/black"
+            android:textColor="#FFFFFF"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -27,10 +28,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/website_name"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="7dp"
-            android:text="@string/http" />
+            android:text="@string/http"
+            android:textColor="#FFFFFF" />
 
     </RelativeLayout>
 

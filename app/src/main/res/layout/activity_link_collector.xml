@@ -28,7 +28,7 @@
         android:contentDescription="@string/add"
         android:focusable="true"
         android:tint="#FFFFFF"
-        app:backgroundTint="#800606"
+        app:backgroundTint="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"

@@ -26,4 +26,6 @@
     <string name="add">Add</string>
     <string name="website_name">Website Name</string>
     <string name="http">http://</string>
+    <string name="find_my_location">Find My Location</string>
+    <string name="shen_ying_n_northeastern_edu">shen.ying\n@northeastern.edu</string>
 </resources>
