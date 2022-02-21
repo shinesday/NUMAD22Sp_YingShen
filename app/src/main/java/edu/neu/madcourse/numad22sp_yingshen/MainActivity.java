@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     Button button;
     Button button2;
     Button linkCollector;
-    Button locator;
+    Button buttonlocator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +49,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        locator = findViewById(R.id.btn_locator);
-        locator.setOnClickListener(new View.OnClickListener() {
+        buttonlocator = findViewById(R.id.btn_locator);
+        buttonlocator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openLocator();
+                openUserLocator();
             }
         });
 
@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intentLinkCollector);
     }
 
-    public void openLocator(){
-        Intent intent = new Intent(this, Locator.class);
-        startActivity(intent);
+    public void openUserLocator(){
+        Intent intentLocator = new Intent(this, UserLocator.class);
+        startActivity(intentLocator);
 
     }
 

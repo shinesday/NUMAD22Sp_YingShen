@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.neu.madcourse.numad22sp_yingshen">
+    
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -9,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_ys_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD22Sp_YingShen">
+        <activity
+            android:name=".UserLocator"
+            android:exported="false" />
         <activity
             android:name=".LinkCollector"
             android:exported="false" />

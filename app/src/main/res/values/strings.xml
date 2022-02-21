@@ -28,4 +28,6 @@
     <string name="http">http://</string>
     <string name="find_my_location">Find My Location</string>
     <string name="shen_ying_n_northeastern_edu">shen.ying\n@northeastern.edu</string>
+    <string name="show_my_current_location">Show My Current Location</string>
+    <string name="location">Location:</string>
 </resources>
