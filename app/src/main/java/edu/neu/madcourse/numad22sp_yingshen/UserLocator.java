@@ -56,8 +56,98 @@ public class UserLocator extends AppCompatActivity {
         });
     }
 
-    public void getUserCurrentLocation() {
-        
+    private void getUserCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(UserLocator.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            if (isGPSEnabled()) {
+                LocationServices.getFusedLocationProviderClient(UserLocator.this).requestLocationUpdates(locationRequest, new LocationCallback() {
+                    @Override
+                    public void onLocationResult(LocationResult locationResult) {
+                        super.onLocationResult(locationResult);
+                        LocationServices.getFusedLocationProviderClient(UserLocator.this).removeLocationUpdates(this);
+
+                        if (locationResult != null && locationResult.getLocations().size() >0){
+                            int position = locationResult.getLocations().size() - 1;
+                            double latitude = locationResult.getLocations().get(position).getLatitude();
+                            double longitude = locationResult.getLocations().get(position).getLongitude();
+                            address.setText("Latitude: "+ latitude + "\n" + "Longitude: "+ longitude);
+                        }
+                    }}, Looper.getMainLooper());
+            } else {
+                enableGPS();
+            }
+
+        } else {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+
+    }
+
+    private boolean isGPSEnabled() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        boolean isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        return isEnabled;
+    }
+
+    private void enableGPS() {
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+        builder.setAlwaysShow(true);
+        Task<LocationSettingsResponse> task = LocationServices.getSettingsClient(getApplicationContext()).checkLocationSettings(builder.build());
+
+        task.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
+            @Override
+            public void onComplete(Task<LocationSettingsResponse> locationTask) {
+
+                try {
+                    LocationSettingsResponse locationResponse = locationTask.getResult(ApiException.class);
+                    Toast.makeText(UserLocator.this, "GPS is already enabled", Toast.LENGTH_LONG).show();
+
+                } catch (ApiException e) {
+                    switch (e.getStatusCode()) {
+                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+
+                            try {
+                                ResolvableApiException resolvableApiException = (ResolvableApiException) e;
+                                resolvableApiException.startResolutionForResult(UserLocator.this, 2);
+                            } catch (IntentSender.SendIntentException ex) {
+                                ex.printStackTrace();
+                            }
+                            break;
+
+                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                            break;
+                    }
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int request, String[] permissions, int[] result) {
+        super.onRequestPermissionsResult(request, permissions, result);
+        if (request == 1){
+
+            if (result[0] == PackageManager.PERMISSION_GRANTED){
+
+                if (isGPSEnabled()) {
+                    getUserCurrentLocation();
+                }else {
+                    enableGPS();
+                }
+            }
+
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int request, int result, Intent intent) {
+        super.onActivityResult(request, result, intent);
+        if (request == 2) {
+            if (result == Activity.RESULT_OK) {
+                getUserCurrentLocation();
+            }
+        }
     }
 
 }
