@@ -56,7 +56,6 @@ public class AtYourService extends AppCompatActivity {
         getWeather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AtYourService.this,"Try Again After Location Permission Granted",Toast.LENGTH_SHORT).show();
                 notification.setText("Getting Weather of Current Location, Please Wait...");
                 getCurrentWeather();
             }
@@ -83,16 +82,15 @@ public class AtYourService extends AppCompatActivity {
             }
         };
 
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(AtYourService.this,"Try Again After Location Permission Granted",Toast.LENGTH_SHORT).show();
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
             return;
         }
         locationManager.requestLocationUpdates(location, MIN_TIME, MIN_DISTANCE, locationListener);
     }
 
-    private  void connectToWeb(RequestParams params)
-    {
+    private  void connectToWeb(RequestParams params) {
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(weatherUrl,params,new JsonHttpResponseHandler()
         {
@@ -105,7 +103,6 @@ public class AtYourService extends AppCompatActivity {
                 updateWeather(weather);
                 notification.setText("");
             }
-
         });
 
     }
