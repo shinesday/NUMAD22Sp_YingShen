@@ -56,6 +56,7 @@ public class AtYourService extends AppCompatActivity {
         getWeather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(AtYourService.this,"Try Again After Location Permission Granted",Toast.LENGTH_SHORT).show();
                 notification.setText("Getting Weather of Current Location, Please Wait...");
                 getCurrentWeather();
             }
