@@ -23,12 +23,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/_72"
+        android:paddingLeft="15dp"
         android:textColor="@color/white"
         android:textSize="70sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weather_image"
         app:layout_constraintVertical_bias="0.11" />
@@ -38,13 +39,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:paddingLeft="15dp"
         android:text="@string/sunny"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weather_temperature"
         app:layout_constraintVertical_bias="0.0" />
@@ -54,16 +56,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:paddingLeft="15dp"
         android:text="@string/san_jose"
         android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weather_type"
-        app:layout_constraintVertical_bias="0.007" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/notification"
@@ -80,6 +83,7 @@
         android:id="@+id/btn_find_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/custom_button"
         android:paddingLeft="10dp"
@@ -89,10 +93,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weather_city"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.016" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
