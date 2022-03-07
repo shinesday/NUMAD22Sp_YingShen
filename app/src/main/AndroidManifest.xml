@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD22Sp_YingShen">
         <activity
+            android:name=".AtYourService"
+            android:exported="false" />
+        <activity
             android:name=".UserLocator"
             android:exported="false" />
         <activity

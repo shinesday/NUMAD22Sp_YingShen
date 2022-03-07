@@ -13,7 +13,8 @@ public class MainActivity extends AppCompatActivity {
     Button button;
     Button button2;
     Button linkCollector;
-    Button buttonlocator;
+    Button buttonLocator;
+    Button buttonService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +50,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        buttonlocator = findViewById(R.id.btn_locator);
-        buttonlocator.setOnClickListener(new View.OnClickListener() {
+        buttonLocator = findViewById(R.id.btn_locator);
+        buttonLocator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openUserLocator();
+            }
+        });
+
+        buttonService = findViewById(R.id.btn_service);
+        buttonService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openAtYourService();
             }
         });
 
@@ -78,6 +87,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intentLocator = new Intent(this, UserLocator.class);
         startActivity(intentLocator);
 
+    }
+
+    public void openAtYourService(){
+        Intent intentAtYourService = new Intent(this, AtYourService.class);
+        startActivity(intentAtYourService);
     }
 
 }

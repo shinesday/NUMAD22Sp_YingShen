@@ -30,4 +30,14 @@
     <string name="shen_ying_n_northeastern_edu">shen.ying\n@northeastern.edu</string>
     <string name="show_my_current_location">Show My Current Location</string>
     <string name="location">Location:</string>
+    <string name="at_your_service">At Your Service</string>
+    <string name="_0_f">0 F</string>
+    <string name="city">city</string>
+    <string name="_0_f_">0 °F</string>
+    <string name="find_current_weather">Find Current Weather</string>
+    <string name="type">type</string>
+    <string name="_72">72 ℉</string>
+    <string name="sunny">Sunny</string>
+    <string name="san_jose">San Jose</string>
+    <string name="weather_type">weather_type</string>
 </resources>
