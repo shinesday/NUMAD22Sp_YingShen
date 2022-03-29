@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "688508874027",
+    "project_id": "numad22sp-yingshen",
+    "storage_bucket": "numad22sp-yingshen.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688508874027:android:00f36fb8c5bd4e4be1a96e",
+        "android_client_info": {
+          "package_name": "edu.neu.madcourse.numad22sp_yingshen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "688508874027-elq2agt4ipfkmmbmde97orn1si05su31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEAOJd0TJAxLF7U5Fo5P9743RZoExa4xs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "688508874027-elq2agt4ipfkmmbmde97orn1si05su31.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

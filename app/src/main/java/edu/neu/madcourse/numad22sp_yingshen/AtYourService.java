@@ -56,7 +56,7 @@ public class AtYourService extends AppCompatActivity {
         getWeather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                notification.setText("Getting Weather of Current Location, Please Wait...");
+                notification.setText("Please Wait");
                 getCurrentWeather();
             }
         });
